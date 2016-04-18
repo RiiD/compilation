@@ -7,5 +7,6 @@ flex:
 bison:
 	bison -d *.y
 
-clear:
-	rm *.c
+clean:
+	@rm *.c -rf
+	@rm *.h -rf

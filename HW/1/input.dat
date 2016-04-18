@@ -1,2 +1,12 @@
 verbose
-state: Florida; electors: 1000;  Democrats Win!
+state: Florida; electors: 100;  Democrats Win!
+
+state: Hawaii; electors: 40;   Democrats Win !
+
+state: California; electors: 550;
+county: El Dorado; Hillary Clinton: 26220
+                   Donald: 42045
+county: Fresno; 95059 (D) 117342 (R)
+county: Los Angeles; Hillary: 1710505
+                     Donald Trump: 871930
+county: San Diego; cancelled
