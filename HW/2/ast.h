@@ -110,6 +110,15 @@ public:
 	 BoolExp *_right; // right operand
 };
 
+class Imply : public BoolExp {
+public:
+     Imply (BoolExp *left, BoolExp *right) { _left = left; _right = right; }
+	 void genBoolExp (int truelabel, int falselabel); // override
+
+	 BoolExp *_left; // left operand
+	 BoolExp *_right; // right operand
+};
+
 class And : public BoolExp {
 public:
      And (BoolExp *left, BoolExp *right) { _left = left; _right = right; }

@@ -165,26 +165,22 @@ void SimpleBoolExp::genBoolExp (int truelabel, int falselabel)
 }
 
 //---------REUT--------------//
-void IMPLY::genBoolExp (int truelabel, int falselabel)
+void Imply::genBoolExp (int truelabel, int falselabel)
 {
     if (truelabel == FALL_THROUGH && falselabel == FALL_THROUGH)
 	    return; // no need for code
 
-    int next_label = newlabel();
     if  (truelabel == FALL_THROUGH) {
+      int next_label = newlabel();
       _left->genBoolExp (FALL_THROUGH, next_label);
-		  _right->genBoolExp (next_label, FALL_THROUGH);
+		  _right->genBoolExp (FALL_THROUGH, falselabel);
         emit ("label%d :\n", next_label);
-
     }  else if (falselabel == FALL_THROUGH) {
-       _left->genBoolExp (FALL_THROUGH, next_label);
+       _left->genBoolExp (FALL_THROUGH, truelabel);
 	     _right->genBoolExp (truelabel, FALL_THROUGH);
 
-	} else { // no fall through
-	   _left->genBoolExp (truelabel, // if left operand is true then the or expresson is true
-	                                 // so jump to  truelabel (without evaluating right operand)
-						  FALL_THROUGH); // if left operand is false then
-						                  // fall through and evaluate right operand
+	} else {
+	   _left->genBoolExp (FALL_THROUGH, truelabel);
 	   _right->genBoolExp (truelabel, falselabel);
 	}
 }
