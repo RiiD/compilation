@@ -1,0 +1,5 @@
+*.o
+*.tab.*
+lex.yy.*
+build
+~*
