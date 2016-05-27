@@ -80,27 +80,19 @@ void BinaryOp::genExp ()
 	int left_operand_result = _left->_result;
 	int right_operand_result = _right->_result;
 
+  if (_left->_type != _right->_type) {
+    if (_left->_type == _INT) {
+      left_operand_result = newTemp();
+      emit("_t%d = (float) _t%d\n", left_operand_result, _left->_result);
+    } else {
+      right_operand_result = newTemp();
+      emit("_t%d = (float) _t%d\n", right_operand_result, _right->_result);
+    }
+  }
+
 	_result = newTemp ();
 
 	const char *the_op = opName (_op, _type);
-#if 0
-    switch (_op) {
-	    case PLUS:
-		    the_op = '+';
-			break;
-		case MINUS:
-		    the_op = '-';
-			break;
-		case MUL:
-		    the_op = '*';
-			break;
-		case DIV:
-		    the_op = '/';
-			break;
-		default:
-		    fprintf (stderr, "internal compiler error #2\n"); exit (1);
-	}
-#endif
 
   	emit ("_t%d = _t%d %s _t%d\n", _result, left_operand_result, the_op, right_operand_result);
 }
